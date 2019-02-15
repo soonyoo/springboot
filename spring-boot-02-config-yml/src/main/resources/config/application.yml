@@ -1,0 +1,19 @@
+person:
+  lastName: zhangsan
+  age: 20
+  boss: false
+  birth: 2018/11/21
+  maps:
+    k1: k1
+    v1: 12
+  lists:
+    - zhangsan
+    - lishi
+  dog:
+    name: 来宝
+    age: 2
+
+server:
+  servlet:
+    context-path: /yml
+  port: 8088
