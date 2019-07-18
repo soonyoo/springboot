@@ -1,0 +1,6 @@
+#基础组件配置
+logs:
+  #本地调试开启日志
+  svcperform:
+    enable: true  #是否开启性能日志
+    printResult: true  #是否打印输出结果

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="form1" action="/emp/save" method="post">
+    <table id="tb1">
+        <tr>
+            <td>被评价人：</td>
+            <td>
+                <select name="name">
+                    <option th:each="user:${userList}" th:value="${user['name']}" th:text="${user['name']}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>工作饱和度：</td>
+            <td><input name="saturation"  type="text" /></td>
+        </tr>
+        <tr>
+            <td>重点工作完成情况：</td>
+            <td><input name="completion"  type="text"  /></td>
+        </tr>
+        <tr>
+            <td>个人贡献：</td>
+            <td><input name="contribution"  type="text"  /></td>
+        </tr>
+        <tr>
+            <td>内外满意度：</td>
+            <td><input name="satisfaction"  type="text" /></td>
+        </tr>
+        <tr>
+            <td>个人成长性:</td>
+            <td><input name="growth"  type="text"  /></td>
+        </tr>
+        <tr>
+            <td>创新成果</td>
+            <td><input name="innovation"  type="text"  /></td>
+        </tr>
+        <tr>
+            <td>特殊加分项：</td>
+            <td><input name="addition" type="text" /></td>
+        </tr>
+        <tr>
+            <td>特殊扣分项：</td>
+            <td><input type="text" name="subtraction" /></td>
+        </tr>
+        <tr>
+            <td>评价时间，年月</td>
+            <td>
+                <input type="text" name="inputDate" />(格式：yyyy-MM-dd)
+            </td>
+        </tr>
+        <tr>
+            <td>评价人：</td>
+            <td><input type="text" name="evaluator" /> </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><button type="submit" value="" >提交</button> </td>
+        </tr>
+
+    </table>
+
+</form>
+
+</body>
+</html>

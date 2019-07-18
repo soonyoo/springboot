@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chinaunicom.mapper.EvaluationMapper" >
+  <resultMap id="BaseResultMap" type="cn.chinaunicom.po.Evaluation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="saturation" property="saturation" jdbcType="REAL" />
+    <result column="completion" property="completion" jdbcType="REAL" />
+    <result column="contribution" property="contribution" jdbcType="REAL" />
+    <result column="satisfaction" property="satisfaction" jdbcType="REAL" />
+    <result column="growth" property="growth" jdbcType="REAL" />
+    <result column="innovation" property="innovation" jdbcType="REAL" />
+    <result column="addition" property="addition" jdbcType="REAL" />
+    <result column="subtraction" property="subtraction" jdbcType="REAL" />
+    <result column="input_date" property="inputDate" jdbcType="TIMESTAMP" />
+    <result column="evaluator" property="evaluator" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, saturation, completion, contribution, satisfaction, growth, innovation, 
+    addition, subtraction, input_date, evaluator
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.chinaunicom.po.EvaluationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from evaluation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from evaluation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from evaluation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.chinaunicom.po.EvaluationExample" >
+    delete from evaluation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.chinaunicom.po.Evaluation" >
+    insert into evaluation (id, name, saturation, 
+      completion, contribution, satisfaction, 
+      growth, innovation, addition, 
+      subtraction, input_date, evaluator
+      )
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{saturation,jdbcType=REAL}, 
+      #{completion,jdbcType=REAL}, #{contribution,jdbcType=REAL}, #{satisfaction,jdbcType=REAL}, 
+      #{growth,jdbcType=REAL}, #{innovation,jdbcType=REAL}, #{addition,jdbcType=REAL}, 
+      #{subtraction,jdbcType=REAL}, #{inputDate,jdbcType=TIMESTAMP}, #{evaluator,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.chinaunicom.po.Evaluation" >
+    insert into evaluation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="saturation != null" >
+        saturation,
+      </if>
+      <if test="completion != null" >
+        completion,
+      </if>
+      <if test="contribution != null" >
+        contribution,
+      </if>
+      <if test="satisfaction != null" >
+        satisfaction,
+      </if>
+      <if test="growth != null" >
+        growth,
+      </if>
+      <if test="innovation != null" >
+        innovation,
+      </if>
+      <if test="addition != null" >
+        addition,
+      </if>
+      <if test="subtraction != null" >
+        subtraction,
+      </if>
+      <if test="inputDate != null" >
+        input_date,
+      </if>
+      <if test="evaluator != null" >
+        evaluator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="saturation != null" >
+        #{saturation,jdbcType=REAL},
+      </if>
+      <if test="completion != null" >
+        #{completion,jdbcType=REAL},
+      </if>
+      <if test="contribution != null" >
+        #{contribution,jdbcType=REAL},
+      </if>
+      <if test="satisfaction != null" >
+        #{satisfaction,jdbcType=REAL},
+      </if>
+      <if test="growth != null" >
+        #{growth,jdbcType=REAL},
+      </if>
+      <if test="innovation != null" >
+        #{innovation,jdbcType=REAL},
+      </if>
+      <if test="addition != null" >
+        #{addition,jdbcType=REAL},
+      </if>
+      <if test="subtraction != null" >
+        #{subtraction,jdbcType=REAL},
+      </if>
+      <if test="inputDate != null" >
+        #{inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluator != null" >
+        #{evaluator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.chinaunicom.po.EvaluationExample" resultType="java.lang.Integer" >
+    select count(*) from evaluation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update evaluation
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saturation != null" >
+        saturation = #{record.saturation,jdbcType=REAL},
+      </if>
+      <if test="record.completion != null" >
+        completion = #{record.completion,jdbcType=REAL},
+      </if>
+      <if test="record.contribution != null" >
+        contribution = #{record.contribution,jdbcType=REAL},
+      </if>
+      <if test="record.satisfaction != null" >
+        satisfaction = #{record.satisfaction,jdbcType=REAL},
+      </if>
+      <if test="record.growth != null" >
+        growth = #{record.growth,jdbcType=REAL},
+      </if>
+      <if test="record.innovation != null" >
+        innovation = #{record.innovation,jdbcType=REAL},
+      </if>
+      <if test="record.addition != null" >
+        addition = #{record.addition,jdbcType=REAL},
+      </if>
+      <if test="record.subtraction != null" >
+        subtraction = #{record.subtraction,jdbcType=REAL},
+      </if>
+      <if test="record.inputDate != null" >
+        input_date = #{record.inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.evaluator != null" >
+        evaluator = #{record.evaluator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update evaluation
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      saturation = #{record.saturation,jdbcType=REAL},
+      completion = #{record.completion,jdbcType=REAL},
+      contribution = #{record.contribution,jdbcType=REAL},
+      satisfaction = #{record.satisfaction,jdbcType=REAL},
+      growth = #{record.growth,jdbcType=REAL},
+      innovation = #{record.innovation,jdbcType=REAL},
+      addition = #{record.addition,jdbcType=REAL},
+      subtraction = #{record.subtraction,jdbcType=REAL},
+      input_date = #{record.inputDate,jdbcType=TIMESTAMP},
+      evaluator = #{record.evaluator,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.chinaunicom.po.Evaluation" >
+    update evaluation
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="saturation != null" >
+        saturation = #{saturation,jdbcType=REAL},
+      </if>
+      <if test="completion != null" >
+        completion = #{completion,jdbcType=REAL},
+      </if>
+      <if test="contribution != null" >
+        contribution = #{contribution,jdbcType=REAL},
+      </if>
+      <if test="satisfaction != null" >
+        satisfaction = #{satisfaction,jdbcType=REAL},
+      </if>
+      <if test="growth != null" >
+        growth = #{growth,jdbcType=REAL},
+      </if>
+      <if test="innovation != null" >
+        innovation = #{innovation,jdbcType=REAL},
+      </if>
+      <if test="addition != null" >
+        addition = #{addition,jdbcType=REAL},
+      </if>
+      <if test="subtraction != null" >
+        subtraction = #{subtraction,jdbcType=REAL},
+      </if>
+      <if test="inputDate != null" >
+        input_date = #{inputDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluator != null" >
+        evaluator = #{evaluator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.chinaunicom.po.Evaluation" >
+    update evaluation
+    set name = #{name,jdbcType=VARCHAR},
+      saturation = #{saturation,jdbcType=REAL},
+      completion = #{completion,jdbcType=REAL},
+      contribution = #{contribution,jdbcType=REAL},
+      satisfaction = #{satisfaction,jdbcType=REAL},
+      growth = #{growth,jdbcType=REAL},
+      innovation = #{innovation,jdbcType=REAL},
+      addition = #{addition,jdbcType=REAL},
+      subtraction = #{subtraction,jdbcType=REAL},
+      input_date = #{inputDate,jdbcType=TIMESTAMP},
+      evaluator = #{evaluator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

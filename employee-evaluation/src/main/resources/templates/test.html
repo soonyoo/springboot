@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="asserts/js/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#btnPost').click(function () {
+                var postData = {
+                    "inputName":"uu",
+                    "grade": "[[, , , , , , , , ],[易阳锋, 1, 1, 1, 11, 11, 1, 1, 1],[黄家乐, 2, 2, 2, 2, 22, 2, 2, 2]]"
+                };
+
+                $.ajax({
+                    url: '/emp/frontdata',
+                    type: 'POST',
+                    data: postData,
+                    cache: false,
+                    processData: false,
+                    contentType: 'application/json',
+                    //请求成功时处理
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+<input type="button" value="发送请求" id="btnPost" />
+</body>
+</html>

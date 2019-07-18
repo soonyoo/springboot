@@ -1,0 +1,15 @@
+#web组件配置
+web:
+  #注意，app的这几个配置请放到工程目录下，配置中心中不能有“@”字符
+  app:
+    title: @project.name@
+    description: @project.description@
+    version: @project.version@
+  rest:
+    enable: true #启用rest调用，默认false不启用
+    async: #服务中使用异步调用时配置
+      enable: true #启用rest异步调用，默认false不启用
+    #中心选择器，选择domains中的中心
+    svcdomains-layout:
+      - domain: acting
+      - domain: users
