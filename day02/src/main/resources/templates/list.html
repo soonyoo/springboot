@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link th:href="@{/css/bootstrap.min.css}"  rel="stylesheet">
+    <link th:href="@{/css/bootstrap-responsive.min.css}" rel="stylesheet">
+    <link th:href="@{/css/site.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" ></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="span9">
+    <h3>
+        用户信息列表
+    </h3>
+    <a th:href="@{/add}">添加用户信息</a>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>
+                id
+            </th>
+            <th>
+                username
+            </th>
+            <th>
+                age
+            </th>
+            <th>
+                email
+            </th>
+            <th>
+                phone
+            </th>
+            <th>
+                remark
+            </th>
+            <th>
+                options
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user:${lists}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phone}"></td>
+            <td th:text="${user.remark}"></td>
+            <td>
+                <a class="btn btn-sm btn-primary" th:href="@{/user/}+${user.id}">编辑</a>
+                <button th:attr="del_uri=@{/user/}+${user.id}" class="btn btn-sm btn-danger deleteBtn">删除</button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <form id="deleteEmpForm"  method="post">
+        <input type="hidden" name="_method" value="delete"/>
+    </form>
+    <script>
+        $(".deleteBtn").click(function(){
+            //删除当前员工的
+            $("#deleteEmpForm").attr("action",$(this).attr("del_uri")).submit();
+            return false;
+        });
+    </script>
+
+</div>
+
+</body>
+</html>

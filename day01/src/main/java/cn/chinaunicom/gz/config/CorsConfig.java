@@ -1,4 +1,4 @@
-package cn.chinaunicom.controller;
+package cn.chinaunicom.gz.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

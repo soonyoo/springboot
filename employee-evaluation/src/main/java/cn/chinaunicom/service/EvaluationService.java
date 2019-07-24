@@ -17,6 +17,10 @@ public interface EvaluationService {
 
     List<Evaluation> getAllEvaluationByInputMonth(String inputMonth);
 
+    List<Evaluation> getEvaluationReportByInputMonth();
+
+
+
 
 
     /**

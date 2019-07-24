@@ -1,0 +1,95 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户信息录入</title>
+    <link th:href="@{/css/bootstrap.min.css}"  rel="stylesheet">
+    <link th:href="@{/css/bootstrap-responsive.min.css}" rel="stylesheet">
+    <link th:href="@{/css/site.css}" rel="stylesheet">
+    <script th:src="@{/js/jquery.min.js}" ></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="https://cdn.bootcss.com/jquery.serializeJSON/2.9.0/jquery.serializejson.min.js"></script>
+
+</head>
+<body>
+
+<div class="span9">
+    <h3 th:text="${user!=null}?'用户信息修改':'用户信息录入'">
+    </h3>
+    <form id="edit-profile" class="form-horizontal">
+        <input type="hidden" name="_method" value="put" th:if="${user!=null}"/>
+        <input type="hidden" name="id" th:if="${user!=null}" th:value="${user.id}">
+        <fieldset>
+            <legend>Your Profile</legend>
+            <div class="control-group">
+                <label class="control-label" for="username">Name</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="username" name="username" value="" th:value="${user!=null}?${user.username}"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="phone">Phone</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="phone" name="phone" value="" th:value="${user!=null}?${user.phone}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="age">age</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="age" name="age" value="" th:value="${user!=null}?${user.age}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="email">Email</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="email" name="email" value="" th:value="${user!=null}?${user.email}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="remark">Biography</label>
+                <div class="controls">
+                    <textarea class="input-xlarge" id="remark" name="remark" rows="4" th:text="${user!=null}?${user.remark}"></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" id="btnSubmit" class="btn" th:text="${user!=null}?'修改':'添加'">Save</button> <button class="btn">Cancel</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</div>
+
+<script th:inline="javascript">
+    $("#btnSubmit").click(function () {
+        //把按钮设为disabled
+        $("#btnSubmit").attr("disabled","true");
+        //thymeleaf在js中获取项目根路径
+        var ctxPath = /*[[@{/}]]*/"";
+        //thymeleaf给js变量赋值
+        var userinfo = [[${user}]];
+        //表单提交的类型
+        var postType = "";
+        if (userinfo != null){
+            postType = "PUT";
+        }else{
+            postType = "POST";
+        }
+        //Jquery表单序列化3种模式
+        //var data = $("#edit-profile").serialize();
+        //var data = $('#edit-profile').serializeArray();
+        var data = $('#edit-profile').serializeJSON();
+        $.ajax({
+            url: ctxPath+'/user/post',
+            type: postType,
+            data: JSON.stringify(data),//参数值
+            contentType:"application/json; charset=utf-8",//请求参数的在格式
+            //请求成功时处理
+            success: function (data) {
+                alert(data.data);
+                window.location.href=ctxPath+"/user/list";
+            }
+        });
+    });
+</script>
+</body>
+</html>

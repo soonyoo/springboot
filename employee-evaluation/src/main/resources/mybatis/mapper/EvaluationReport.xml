@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.chinaunicom.mapper.EvaluationReport" >
+    <!--List<Evaluation> getEvaByMonth(String inputMonth);
+    where DATE_FORMAT(input_date,'%Y-%m') = #{inputMonth}
+    -->
+    <select id="getEvaByMonth" resultType="cn.chinaunicom.po.Evaluation">
+        select
+            `name`,
+            sum(`saturation`)/count(1) as saturation,
+            sum(`completion`)/count(1) as completion,
+            sum(`contribution`)/count(1) as contribution,
+            sum(`satisfaction`)/count(1) as satisfaction,
+            sum(`growth`)/count(1) as growth,
+            sum(`innovation`)/count(1) as innovation,
+            sum(`addition`)/count(1) as addition,
+            sum(`subtraction`)/count(1) as subtraction,
+            DATE_FORMAT(input_date,'%Y-%m') as input_date
+        from  evaluation
+        group by name,DATE_FORMAT(input_date,'%Y-%m')
+    </select>
+</mapper>

@@ -4,6 +4,7 @@ package cn.chinaunicom.controller;
 import cn.chinaunicom.bo.FrontEvaPo;
 import cn.chinaunicom.bo.FrontEvaPost;
 import cn.chinaunicom.common.TaotaoResult;
+import cn.chinaunicom.common.util.DateUtil;
 import cn.chinaunicom.po.Evaluation;
 import cn.chinaunicom.po.Staff;
 import cn.chinaunicom.service.EvaluationService;
@@ -80,6 +81,10 @@ public class EvaluationController {
         return "success";
     }
 
+    /**
+     * 返回所有员工互评信息
+     * @return
+     */
     @GetMapping("/emp/evalist")
     @ResponseBody
     public List<Evaluation> getAllEva(){
@@ -88,7 +93,11 @@ public class EvaluationController {
     }
 
 
-
+    /**
+     * 接收前端发过来的互评信息，入库，并返回操作成功失败提示信息。
+     * @param evaPost
+     * @return
+     */
     @PostMapping("/emp/frontdata")
     @ResponseBody
     public TaotaoResult getData(@RequestBody FrontEvaPost evaPost){
@@ -102,12 +111,30 @@ public class EvaluationController {
         }
     }
 
+    /**
+     * 根据传入的年月，返回互评数据
+     * @param inputMonth
+     * @return
+     */
     @GetMapping("/emp/evaluation/{inputMonth}")
     @ResponseBody
     public List<Evaluation> getAllEvaluationByInputMonth(@PathVariable("inputMonth") String inputMonth){
         List<Evaluation> list = evaluationService.getAllEvaluationByInputMonth(inputMonth);
         return list;
     }
+
+    /**
+     * 报表相关，正在开发中。。。。。
+     * @return
+     */
+    @GetMapping("/report/evaluation")
+    @ResponseBody
+    public List<Evaluation> getEvaluationReportByInputMonth(){
+        List<Evaluation> list = evaluationService.getEvaluationReportByInputMonth();
+        return list;
+    }
+
+
 
 
 

@@ -2,6 +2,7 @@ package cn.chinaunicom.service.service.impl;
 
 import cn.chinaunicom.bo.FrontEvaPost;
 import cn.chinaunicom.common.util.DateUtil;
+import cn.chinaunicom.mapper.EvaluationReport;
 import cn.chinaunicom.po.Evaluation;
 import cn.chinaunicom.po.EvaluationExample;
 import cn.chinaunicom.service.EvaluationService;
@@ -18,10 +19,18 @@ import java.util.List;
 public class EvaluationServiceImpl implements EvaluationService {
 
 
-
-
     @Autowired
     private  EvaluationMapper evaluationMapper;
+
+    @Autowired
+    private EvaluationReport evaluationReport;
+
+    @Override
+    public List<Evaluation> getEvaluationReportByInputMonth() {
+        List<Evaluation> evaByMonth = evaluationReport.getEvaByMonth();
+        return evaByMonth;
+    }
+
 
 
     public  Evaluation getEvaluationById(Integer  id){
