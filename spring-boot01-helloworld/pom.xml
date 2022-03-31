@@ -16,7 +16,7 @@
 
     <!-- 定义包版本 -->
     <properties>
-        <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
+        <spring-boot.version>2.5.12</spring-boot.version>
     </properties>
 
     <dependencies>
